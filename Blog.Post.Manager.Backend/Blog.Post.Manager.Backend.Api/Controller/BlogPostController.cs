@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Blog.Post.Manager.Backend.Queries;
+using Blog.Post.Manager.Backend.Models;
+using Microsoft.AspNetCore.Http;
+using Blog.Post.Manager.Backend.Commands;
 
 namespace Blog.Post.Manager.Backend.Api.Controller;
 
@@ -9,12 +14,14 @@ namespace Blog.Post.Manager.Backend.Api.Controller;
 [Route("api/blog")]
 public class BlogPostController : ControllerBase
 {
+    private readonly IMediator _mediator;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogPostController"/> class.
     /// </summary>
-    public BlogPostController()
+    public BlogPostController(IMediator mediator)
     {
-        
+        _mediator = mediator;
     }
 
     /// <summary>
@@ -23,8 +30,23 @@ public class BlogPostController : ControllerBase
     /// <returns></returns>
     [HttpPost]
     [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateBlogPost()
     {
+        await _mediator.Send(
+                new CreateBlogPostCommand
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "My first blog post",
+                    Content = "This is my first blog post",
+                    Author = "John Doe",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    IsPublished = true,
+                    IsDeleted = false
+                }); 
+                                
         return Ok();
     }
 
@@ -34,9 +56,11 @@ public class BlogPostController : ControllerBase
     /// <returns></returns>
     [HttpGet]
     [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<BlogPostModel>))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAllBlogPost()
     {
-        return Ok();
+        return Ok(await _mediator.Send(new GetAllBlogPostQuery()));
     }
 
     /// <summary>

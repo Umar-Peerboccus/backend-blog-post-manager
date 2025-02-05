@@ -8,8 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Post.Manager.Backend.Commands.Handlers\Blog.Post.Manager.Backend.Commands.Handlers.csproj" />
+    <ProjectReference Include="..\Blog.Post.Manager.Backend.Commands\Blog.Post.Manager.Backend.Commands.csproj" />
+    <ProjectReference Include="..\Blog.Post.Manager.Backend.Queries.Handlers\Blog.Post.Manager.Backend.Queries.Handlers.csproj" />
+    <ProjectReference Include="..\Blog.Post.Manager.Backend.Queries\Blog.Post.Manager.Backend.Queries.csproj" />
   </ItemGroup>
 
 </Project>

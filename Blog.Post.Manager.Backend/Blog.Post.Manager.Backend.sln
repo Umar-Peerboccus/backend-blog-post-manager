@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Api", "Blog.Post.Manager.Backend.Api\Blog.Post.Manager.Backend.Api.csproj", "{09515263-EB24-42A3-B237-7A3EADDA80AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Post.Manager.Backend.Api", "Blog.Post.Manager.Backend.Api\Blog.Post.Manager.Backend.Api.csproj", "{09515263-EB24-42A3-B237-7A3EADDA80AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1AF3702D-0A4E-4883-BE8C-1FD5D7F2D058}"
 EndProject
@@ -11,19 +11,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.api", "1.api", "{9C004413
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.business", "2.business", "{3A284F9D-0BE6-4116-8703-75FE6D97AFCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Commands", "Blog.Post.Manager.Backend.Commands\Blog.Post.Manager.Backend.Commands.csproj", "{CD51859A-11FF-4DEE-A439-5232EF5D0394}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Post.Manager.Backend.Commands", "Blog.Post.Manager.Backend.Commands\Blog.Post.Manager.Backend.Commands.csproj", "{CD51859A-11FF-4DEE-A439-5232EF5D0394}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Commands.Handlers", "Blog.Post.Manager.Backend.Commands.Handlers\Blog.Post.Manager.Backend.Commands.Handlers.csproj", "{EFF968C3-5585-41BE-A748-B976473FBFE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Post.Manager.Backend.Commands.Handlers", "Blog.Post.Manager.Backend.Commands.Handlers\Blog.Post.Manager.Backend.Commands.Handlers.csproj", "{EFF968C3-5585-41BE-A748-B976473FBFE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Queries", "Blog.Post.Manager.Backend.Queries\Blog.Post.Manager.Backend.Queries.csproj", "{CD9AF30A-F595-4764-9289-A50E8C08E39F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Post.Manager.Backend.Queries", "Blog.Post.Manager.Backend.Queries\Blog.Post.Manager.Backend.Queries.csproj", "{CD9AF30A-F595-4764-9289-A50E8C08E39F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Queries.Handlers", "Blog.Post.Manager.Backend.Queries.Handlers\Blog.Post.Manager.Backend.Queries.Handlers.csproj", "{C9E4F700-13FD-4238-817D-000CA872A14E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Post.Manager.Backend.Queries.Handlers", "Blog.Post.Manager.Backend.Queries.Handlers\Blog.Post.Manager.Backend.Queries.Handlers.csproj", "{C9E4F700-13FD-4238-817D-000CA872A14E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.common", "0.common", "{4723D5FE-4B6F-4643-A610-2E4FB2434FD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Common.Cqrs.Commands", "Blog.Post.Manager.Common.Cqrs.Commands\Blog.Post.Manager.Common.Cqrs.Commands.csproj", "{4D2F6A65-43EC-497C-98D0-9233DB9353E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Post.Manager.Common.Cqrs.Commands", "Blog.Post.Manager.Common.Cqrs.Commands\Blog.Post.Manager.Common.Cqrs.Commands.csproj", "{4D2F6A65-43EC-497C-98D0-9233DB9353E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Common.Cqrs.Queries", "Blog.Post.Manager.Common.Cqrs.Queries\Blog.Post.Manager.Common.Cqrs.Queries.csproj", "{307022FD-157A-45A0-B503-029EBB47A8D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Post.Manager.Common.Cqrs.Queries", "Blog.Post.Manager.Common.Cqrs.Queries\Blog.Post.Manager.Common.Cqrs.Queries.csproj", "{307022FD-157A-45A0-B503-029EBB47A8D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Models", "Blog.Post.Manager.Backend.Models\Blog.Post.Manager.Backend.Models.csproj", "{3A758F3C-90C2-4DEA-AE8F-74BD50980D5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{307022FD-157A-45A0-B503-029EBB47A8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{307022FD-157A-45A0-B503-029EBB47A8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{307022FD-157A-45A0-B503-029EBB47A8D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A758F3C-90C2-4DEA-AE8F-74BD50980D5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A758F3C-90C2-4DEA-AE8F-74BD50980D5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A758F3C-90C2-4DEA-AE8F-74BD50980D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A758F3C-90C2-4DEA-AE8F-74BD50980D5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{4723D5FE-4B6F-4643-A610-2E4FB2434FD1} = {1AF3702D-0A4E-4883-BE8C-1FD5D7F2D058}
 		{4D2F6A65-43EC-497C-98D0-9233DB9353E6} = {4723D5FE-4B6F-4643-A610-2E4FB2434FD1}
 		{307022FD-157A-45A0-B503-029EBB47A8D8} = {4723D5FE-4B6F-4643-A610-2E4FB2434FD1}
+		{3A758F3C-90C2-4DEA-AE8F-74BD50980D5E} = {3A284F9D-0BE6-4116-8703-75FE6D97AFCA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {32635B60-F85F-47AF-B299-2FAED89C7026}
