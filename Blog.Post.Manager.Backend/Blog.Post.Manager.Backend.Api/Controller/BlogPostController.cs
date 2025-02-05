@@ -71,6 +71,18 @@ public class BlogPostController : ControllerBase
     [Produces("application/json")]
     public async Task<IActionResult> UpdateBlogPost()
     {
+        await _mediator.Send(
+                        new UpdateBlogPostCommand 
+                        {
+                            Id = Guid.NewGuid(),
+                            Title = "My first blog post",
+                            Content = "This is my first blog post",
+                            Author = "John Doe",
+                            CreatedAt = DateTime.Now,
+                            UpdatedAt = DateTime.Now,
+                            IsPublished = true,
+                            IsDeleted = false
+                        });
         return Ok();
     }
 
@@ -80,8 +92,11 @@ public class BlogPostController : ControllerBase
     /// <returns></returns>
     [HttpDelete("delete")]
     [Produces("application/json")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> DeleteBlogPosts()
     {
+        await _mediator.Send(new DeleteBlogPostCommand { Id = Guid.NewGuid() });
         return Ok();
     }
 }
