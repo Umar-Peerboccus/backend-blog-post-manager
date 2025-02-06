@@ -17,5 +17,5 @@ public interface IBlogPostStore
     /// <param name="isPublished">Is the blog post published or not.</param>
     /// <param name="isDeleted">Is the blog post deleted or not.</param>
     /// <returns></returns>
-    Task<Guid> CreateBlogPost(Guid id, string title, string content, string author, DateTime createdAt, DateTime UpdatedAt, bool isPublished, bool isDeleted);
+    Task<Guid> CreateBlogPostAsync(string title, string content, string author, bool isPublished, bool isDeleted);
 }

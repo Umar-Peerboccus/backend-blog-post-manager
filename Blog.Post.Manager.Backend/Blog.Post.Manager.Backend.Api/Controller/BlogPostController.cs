@@ -32,24 +32,21 @@ public class BlogPostController : ControllerBase
     /// <returns>The identifier of the blog post created.</returns>
     [HttpPost]
     [Produces("application/json")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostRequestModel request)
     {
-        await _mediator.Send(
+       var id = await _mediator.Send(
                 new CreateBlogPostCommand
                 {
-                    Id = Guid.NewGuid(),
                     Title = request.Title,
                     Content = request.Content,
                     Author = request.Author,
-                    CreatedAt = DateTime.Now,
-                    UpdatedAt = DateTime.Now,
                     IsPublished = request.IsPublished,
                     IsDeleted = request.IsDeleted
                 }); 
                                 
-        return Ok();
+        return Ok(id);
     }
 
     /// <summary>

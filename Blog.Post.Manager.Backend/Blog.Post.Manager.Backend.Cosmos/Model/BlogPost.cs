@@ -1,12 +1,18 @@
-﻿using MediatR;
+﻿using Newtonsoft.Json;
 
-namespace Blog.Post.Manager.Backend.Commands;
+namespace Blog.Post.Manager.Backend.Cosmos.Model;
 
 /// <summary>
-/// The CreateBlogPostCommand.
+/// The blog post data model to be stored in Cosmos DB NoSql.
 /// </summary>
-public class CreateBlogPostCommand : IRequest<Guid>
+public record BlogPost
 {
+    /// <summary>
+    /// Gets or sets the blog post identifier.
+    /// </summary>
+    [JsonProperty(PropertyName = "id")]
+    public Guid Id { get; set; }
+
     /// <summary>
     /// Gets or sets the title.
     /// </summary>

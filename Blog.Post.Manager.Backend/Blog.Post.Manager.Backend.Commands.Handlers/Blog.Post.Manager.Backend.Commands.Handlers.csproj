@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Commands\Blog.Post.Manager.Backend.Commands.csproj" />
+    <ProjectReference Include="..\Blog.Post.Manager.Backend.Stores.Abstraction\Blog.Post.Manager.Backend.Stores.Abstraction.csproj" />
   </ItemGroup>
 
 </Project>

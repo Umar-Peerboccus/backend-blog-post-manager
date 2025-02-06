@@ -1,11 +1,14 @@
 ﻿
 using Blog.Post.Manager.Backend.Commands.Handlers;
+using Blog.Post.Manager.Backend.Cosmos.Model;
 using Blog.Post.Manager.Backend.Queries.Handlers;
+using Blog.Post.Manager.Backend.Stores.Abstraction;
 using Blog.Post.Manager.Backend.Stores.Cosmos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Azure.Cosmos;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Blog.Post.Manager.Backend.Api;
 
@@ -24,25 +27,20 @@ public static class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Configuration for Cosmos DB NoSql Database
-        var config = builder.Configuration;
 
-        if (config["CosmosDb:Account"] is null 
-                || config["CosmosDb:Key"] is null 
-                    || config["CosmosDb:DatabaseName"] is null 
-                        || config["CosmosDb:ContainerName"] is null) 
+        // Bind settings
+        builder.Services.Configure<CosmosDbSettings>(builder.Configuration.GetSection("CosmosDb"));
+
+        // Register CosmosClient
+        builder.Services.AddSingleton<CosmosClient>(serviceProvider =>
         {
-            throw new NullReferenceException("Please provide CosmosDb:Account, CosmosDb:Key, CosmosDb:DatabaseName or CosmosDb:ContainerName in the appsettings.json");
-        }
+            // Get the configuration from appsettings.json
+            var settings = serviceProvider.GetRequiredService<IOptions<CosmosDbSettings>>().Value;
+            return new CosmosClient(settings.AccountEndpoint, settings.Key);
+        });
 
-        var cosmosClient = new CosmosClient(config["CosmosDb:Account"], config["CosmosDb:Key"]);
-
-        builder.Services.AddSingleton(cosmosClient);
-        builder.Services.AddSingleton(sp =>
-                new BlogPostStore(
-                    cosmosClient,
-                    config["CosmosDb:DatabaseName"],
-                    config["CosmosDb:ContainerName"]
-            ));
+        // Register BlogPostStore
+        builder.Services.AddTransient<IBlogPostStore, BlogPostStore>();
 
         // Configuration for MediatR
         builder.Services.AddMediatR(cfg =>
@@ -53,6 +51,7 @@ public static class Program
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
+
         var app = builder.Build();
 
         app.UseHttpsRedirection();
