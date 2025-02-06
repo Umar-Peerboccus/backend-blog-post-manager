@@ -4,6 +4,7 @@ using Blog.Post.Manager.Backend.Queries;
 using Blog.Post.Manager.Backend.Models;
 using Microsoft.AspNetCore.Http;
 using Blog.Post.Manager.Backend.Commands;
+using Blog.Post.Manager.Backend.Models.requests;
 
 namespace Blog.Post.Manager.Backend.Api.Controller;
 
@@ -27,24 +28,25 @@ public class BlogPostController : ControllerBase
     /// <summary>
     /// Create a blog post.
     /// </summary>
+    /// <param name="request">The create blog request model.</param>
     /// <returns></returns>
     [HttpPost]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> CreateBlogPost()
+    public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostRequestModel request)
     {
         await _mediator.Send(
                 new CreateBlogPostCommand
                 {
                     Id = Guid.NewGuid(),
-                    Title = "My first blog post",
-                    Content = "This is my first blog post",
-                    Author = "John Doe",
+                    Title = request.Title,
+                    Content = request.Content,
+                    Author = request.Author,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
-                    IsPublished = true,
-                    IsDeleted = false
+                    IsPublished = request.IsPublished,
+                    IsDeleted = request.IsDeleted
                 }); 
                                 
         return Ok();
@@ -53,7 +55,7 @@ public class BlogPostController : ControllerBase
     /// <summary>
     /// Gets all the blog posts.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A list of blog post.</returns>
     [HttpGet]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<BlogPostModel>))]
@@ -67,21 +69,24 @@ public class BlogPostController : ControllerBase
     /// Update a blog post.
     /// </summary>
     /// <returns></returns>
-    [HttpPut]
+    [HttpPut("{id}")]
     [Produces("application/json")]
-    public async Task<IActionResult> UpdateBlogPost()
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> UpdateBlogPost([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestModel request)
     {
         await _mediator.Send(
                         new UpdateBlogPostCommand 
                         {
-                            Id = Guid.NewGuid(),
-                            Title = "My first blog post",
-                            Content = "This is my first blog post",
-                            Author = "John Doe",
-                            CreatedAt = DateTime.Now,
-                            UpdatedAt = DateTime.Now,
-                            IsPublished = true,
-                            IsDeleted = false
+                            Id = id,
+                            Title = request.Title,
+                            Content = request.Content,
+                            Author = request.Author,
+                            CreatedAt = request.CreatedAt,
+                            UpdatedAt = request.UpdatedAt,
+                            IsPublished = request.IsPublished,
+                            IsDeleted = request.IsDeleted
                         });
         return Ok();
     }
@@ -90,13 +95,13 @@ public class BlogPostController : ControllerBase
     /// Delete a list of blog posts.
     /// </summary>
     /// <returns></returns>
-    [HttpDelete("delete")]
+    [HttpDelete("{id}")]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> DeleteBlogPosts()
+    public async Task<IActionResult> DeleteBlogPosts([FromRoute] Guid id)
     {
-        await _mediator.Send(new DeleteBlogPostCommand { Id = Guid.NewGuid() });
+        await _mediator.Send(new DeleteBlogPostCommand { Id = id });
         return Ok();
     }
 }
