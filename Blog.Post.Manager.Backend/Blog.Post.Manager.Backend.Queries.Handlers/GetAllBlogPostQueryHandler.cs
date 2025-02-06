@@ -7,9 +7,10 @@ public class GetAllBlogPostQueryHandler : IRequestHandler<GetAllBlogPostQuery, I
 {
     public GetAllBlogPostQueryHandler()
     {
+
     }
 
-    public async Task<IList<BlogPostModel>> Handle(GetAllBlogPostQuery request, CancellationToken cancellationToken)
+    public Task<IList<BlogPostModel>> Handle(GetAllBlogPostQuery request, CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }

@@ -29,7 +29,7 @@ public class BlogPostController : ControllerBase
     /// Create a blog post.
     /// </summary>
     /// <param name="request">The create blog request model.</param>
-    /// <returns></returns>
+    /// <returns>The identifier of the blog post created.</returns>
     [HttpPost]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
