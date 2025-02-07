@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Cosmos\Blog.Post.Manager.Backend.Cosmos.csproj" />
+    <ProjectReference Include="..\Blog.Post.Manager.Backend.Models\Blog.Post.Manager.Backend.Models.csproj" />
   </ItemGroup>
 
 </Project>

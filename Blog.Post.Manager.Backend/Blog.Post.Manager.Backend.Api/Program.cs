@@ -1,6 +1,7 @@
 ﻿
 using Blog.Post.Manager.Backend.Commands.Handlers;
 using Blog.Post.Manager.Backend.Cosmos.Model;
+using Blog.Post.Manager.Backend.Mappings;
 using Blog.Post.Manager.Backend.Queries.Handlers;
 using Blog.Post.Manager.Backend.Stores.Abstraction;
 using Blog.Post.Manager.Backend.Stores.Cosmos;
@@ -48,6 +49,9 @@ public static class Program
             cfg.RegisterServicesFromAssembly(typeof(GetAllBlogPostQueryHandler).Assembly);
             cfg.RegisterServicesFromAssembly(typeof(CreateBlogPostCommandHandler).Assembly);
         });
+
+        // Register AutoMapper with BusinessProfle.
+        builder.Services.AddAutoMapper(typeof(BusinessProfile).Assembly);
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();

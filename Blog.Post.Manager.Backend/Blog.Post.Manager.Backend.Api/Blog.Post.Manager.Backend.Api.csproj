@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.46.1" />
@@ -18,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Commands.Handlers\Blog.Post.Manager.Backend.Commands.Handlers.csproj" />
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Commands\Blog.Post.Manager.Backend.Commands.csproj" />
+    <ProjectReference Include="..\Blog.Post.Manager.Backend.Mappings\Blog.Post.Manager.Backend.Mappings.csproj" />
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Queries.Handlers\Blog.Post.Manager.Backend.Queries.Handlers.csproj" />
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Queries\Blog.Post.Manager.Backend.Queries.csproj" />
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Stores.Cosmos\Blog.Post.Manager.Backend.Stores.Cosmos.csproj" />
