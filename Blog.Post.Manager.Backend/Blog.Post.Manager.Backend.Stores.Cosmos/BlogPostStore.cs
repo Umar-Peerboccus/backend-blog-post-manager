@@ -54,13 +54,13 @@ public class BlogPostStore : IBlogPostStore
             if (ex is CosmosException cosmosException)
             {
                 _logger.LogError($"Received {cosmosException.StatusCode} ({cosmosException.Message}).");
+                throw cosmosException;
             }
             else
             {
                 _logger.LogError($"Exception {ex}.");
+                throw;
             }
-
-            return Guid.Empty;
         }
 
         return blogPost.Id;
@@ -115,10 +115,12 @@ public class BlogPostStore : IBlogPostStore
             if (ex is CosmosException cosmosException)
             {
                 _logger.LogError($"Received {cosmosException.StatusCode} ({cosmosException.Message}).");
+                throw cosmosException;
             }
             else
             {
                 _logger.LogError($"Exception {ex}.");
+                throw;
             }
         }
     }
