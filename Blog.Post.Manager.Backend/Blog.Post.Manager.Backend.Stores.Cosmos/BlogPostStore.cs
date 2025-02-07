@@ -4,6 +4,7 @@ using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace Blog.Post.Manager.Backend.Stores.Cosmos;
 
 /// <summary>
@@ -63,5 +64,30 @@ public class BlogPostStore : IBlogPostStore
         }
 
         return blogPost.Id;
+    }
+
+    /// <inheritdoc/>
+    public async Task<IList<BlogPost>> GetAllBlogPostAsync()
+    {
+        List<BlogPost> blogPosts = new List<BlogPost>();
+
+        // Query multiple items from container
+        using FeedIterator<BlogPost> feed = _container.GetItemQueryIterator<BlogPost>(
+            queryText: "SELECT * FROM c"
+        );
+
+        // Iterate query result pages
+        while (feed.HasMoreResults)
+        {
+            FeedResponse<BlogPost> response = await feed.ReadNextAsync();
+
+            // Iterate query results
+            foreach (BlogPost item in response)
+            {
+                blogPosts.Add(item);
+            }
+        }
+
+        return blogPosts;
     }
 }

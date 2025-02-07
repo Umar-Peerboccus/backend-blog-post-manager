@@ -1,4 +1,6 @@
-﻿namespace Blog.Post.Manager.Backend.Stores.Abstraction;
+﻿using Blog.Post.Manager.Backend.Cosmos.Model;
+
+namespace Blog.Post.Manager.Backend.Stores.Abstraction;
 
 /// <summary>
 /// The NoSql store for blog posts.
@@ -16,6 +18,12 @@ public interface IBlogPostStore
     /// <param name="UpdatedAt">The last update date of the blog post.</param>
     /// <param name="isPublished">Is the blog post published or not.</param>
     /// <param name="isDeleted">Is the blog post deleted or not.</param>
-    /// <returns></returns>
+    /// <returns>The identifier of blog post created.</returns>
     Task<Guid> CreateBlogPostAsync(string title, string content, string author, bool isPublished, bool isDeleted);
+
+    /// <summary>
+    /// Get all blog posts.
+    /// </summary>
+    /// <returns>A list of blog posts.</returns>
+    Task<IList<BlogPost>> GetAllBlogPostAsync();
 }

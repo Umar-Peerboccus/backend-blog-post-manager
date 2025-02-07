@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MediatR" Version="12.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Models\Blog.Post.Manager.Backend.Models.csproj" />
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Queries\Blog.Post.Manager.Backend.Queries.csproj" />
+    <ProjectReference Include="..\Blog.Post.Manager.Backend.Stores.Abstraction\Blog.Post.Manager.Backend.Stores.Abstraction.csproj" />
   </ItemGroup>
 
 </Project>
