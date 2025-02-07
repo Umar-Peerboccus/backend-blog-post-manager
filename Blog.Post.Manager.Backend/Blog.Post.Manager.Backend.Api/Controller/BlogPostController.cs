@@ -81,7 +81,6 @@ public class BlogPostController : ControllerBase
                             Content = request.Content,
                             Author = request.Author,
                             CreatedAt = request.CreatedAt,
-                            UpdatedAt = request.UpdatedAt,
                             IsPublished = request.IsPublished,
                             IsDeleted = request.IsDeleted
                         });

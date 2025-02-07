@@ -90,4 +90,36 @@ public class BlogPostStore : IBlogPostStore
 
         return blogPosts;
     }
+
+    /// <inheritdoc/>
+    public async Task UpdateBlogPostAsync(Guid id, string title, string content, string author, DateTime createdAt, bool isPublished, bool isDeleted)
+    {
+        var updatedBlogPost = new BlogPost
+        {
+            Id = id,
+            Title = title,
+            Content = content,
+            Author = author,
+            CreatedAt = createdAt,
+            UpdatedAt = DateTime.UtcNow,
+            IsPublished = isPublished,
+            IsDeleted = isDeleted
+        };
+
+        try
+        {
+            await _container.ReplaceItemAsync(updatedBlogPost, updatedBlogPost.Id.ToString(), null);
+        }
+        catch (Exception ex)
+        {
+            if (ex is CosmosException cosmosException)
+            {
+                _logger.LogError($"Received {cosmosException.StatusCode} ({cosmosException.Message}).");
+            }
+            else
+            {
+                _logger.LogError($"Exception {ex}.");
+            }
+        }
+    }
 }

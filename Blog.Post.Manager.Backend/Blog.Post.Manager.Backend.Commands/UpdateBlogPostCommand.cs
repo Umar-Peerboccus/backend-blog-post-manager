@@ -30,11 +30,6 @@ public class UpdateBlogPostCommand : IRequest
     public DateTime CreatedAt { get; set; }
 
     /// <summary>
-    /// Gets or sets the date the post was last updated.
-    /// </summary>
-    public DateTime UpdatedAt { get; set; }
-
-    /// <summary>
     /// Gets or sets the whether the post is publised.
     /// </summary>
     public bool IsPublished { get; set; }
