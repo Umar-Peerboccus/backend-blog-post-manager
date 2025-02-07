@@ -38,4 +38,10 @@ public interface IBlogPostStore
     /// <param name="isPublished">Is the blog post published or not.</param>
     /// <param name="isDeleted">Is the blog post deleted or not.</param>
     Task UpdateBlogPostAsync(Guid id, string title, string content, string author, DateTime createdAt, bool isPublished, bool isDeleted);
+
+    /// <summary>
+    /// Delete a blog post.
+    /// </summary>
+    /// <param name="id">The blog post identifier.</param>
+    Task DeleteBlogPostAsync(Guid id);
 }

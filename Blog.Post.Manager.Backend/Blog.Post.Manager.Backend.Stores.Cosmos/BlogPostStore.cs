@@ -124,4 +124,26 @@ public class BlogPostStore : IBlogPostStore
             }
         }
     }
+
+    /// <inheritdoc/>
+    public async Task DeleteBlogPostAsync(Guid id)
+    {
+        try
+        {
+            await _container.DeleteItemAsync<BlogPost>(id.ToString(), new PartitionKey(id.ToString()));
+        }
+        catch (Exception ex)
+        {
+            if (ex is CosmosException cosmosException)
+            {
+                _logger.LogError($"Received {cosmosException.StatusCode} ({cosmosException.Message}).");
+                throw cosmosException;
+            }
+            else
+            {
+                _logger.LogError($"Exception {ex}.");
+                throw;
+            }
+        }
+    }
 }

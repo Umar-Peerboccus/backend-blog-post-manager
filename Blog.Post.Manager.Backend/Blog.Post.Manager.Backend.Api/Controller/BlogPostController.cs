@@ -1,8 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Blog.Post.Manager.Backend.Queries;
-using Blog.Post.Manager.Backend.Models;
-using Microsoft.AspNetCore.Http;
 using Blog.Post.Manager.Backend.Commands;
 using Blog.Post.Manager.Backend.Models.requests;
 
@@ -32,8 +30,6 @@ public class BlogPostController : ControllerBase
     /// <returns>The identifier of the blog post created.</returns>
     [HttpPost]
     [Produces("application/json")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostRequestModel request)
     {
        var id = await _mediator.Send(
@@ -55,8 +51,6 @@ public class BlogPostController : ControllerBase
     /// <returns>A list of blog post.</returns>
     [HttpGet]
     [Produces("application/json")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IList<BlogPostModel>))]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetAllBlogPost()
     {
         return Ok(await _mediator.Send(new GetAllBlogPostQuery()));
@@ -68,9 +62,6 @@ public class BlogPostController : ControllerBase
     /// <returns></returns>
     [HttpPut("{id}")]
     [Produces("application/json")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateBlogPost([FromRoute] Guid id, [FromBody] UpdateBlogPostRequestModel request)
     {
         await _mediator.Send(
@@ -93,8 +84,6 @@ public class BlogPostController : ControllerBase
     /// <returns></returns>
     [HttpDelete("{id}")]
     [Produces("application/json")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> DeleteBlogPosts([FromRoute] Guid id)
     {
         await _mediator.Send(new DeleteBlogPostCommand { Id = id });

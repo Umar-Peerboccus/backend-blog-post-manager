@@ -1,16 +1,19 @@
-﻿using MediatR;
+﻿using Blog.Post.Manager.Backend.Stores.Abstraction;
+using MediatR;
 
 namespace Blog.Post.Manager.Backend.Commands.Handlers;
 
 public class DeleteBlogPostCommandHandler : IRequestHandler<DeleteBlogPostCommand>
 {
-    public DeleteBlogPostCommandHandler()
-    {
+    private readonly IBlogPostStore _blogPostStore;
 
+    public DeleteBlogPostCommandHandler(IBlogPostStore blogPostStore)
+    {
+        _blogPostStore = blogPostStore;
     }
 
-    public Task Handle(DeleteBlogPostCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteBlogPostCommand command, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        await _blogPostStore.DeleteBlogPostAsync(command.Id);
     }
 }
