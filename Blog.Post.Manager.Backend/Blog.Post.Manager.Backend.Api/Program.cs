@@ -56,10 +56,17 @@ public static class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll",
+                policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+        });
+        
         var app = builder.Build();
 
         app.UseHttpsRedirection();
         app.MapControllers();
+        app.UseCors("AllowAll");
 
         await app.RunAsync();
     }
