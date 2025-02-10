@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.dataaccess", "1.dataacces
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Stores.Cosmos.UnitTests", "Blog.Post.Manager.Backend.Stores.Cosmos.UnitTests\Blog.Post.Manager.Backend.Stores.Cosmos.UnitTests.csproj", "{BFC8B982-FA67-449D-BC76-848060395C21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Models.Validators", "Blog.Post.Manager.Backend.Models.Validators\Blog.Post.Manager.Backend.Models.Validators.csproj", "{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{BFC8B982-FA67-449D-BC76-848060395C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFC8B982-FA67-449D-BC76-848060395C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFC8B982-FA67-449D-BC76-848060395C21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{0FC2E6B9-AFB6-4A55-AC53-A03FACA9723A} = {1AF3702D-0A4E-4883-BE8C-1FD5D7F2D058}
 		{6A35657E-9E40-434E-9CC6-015E88DD4EDE} = {0FC2E6B9-AFB6-4A55-AC53-A03FACA9723A}
 		{BFC8B982-FA67-449D-BC76-848060395C21} = {6A35657E-9E40-434E-9CC6-015E88DD4EDE}
+		{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0} = {3A284F9D-0BE6-4116-8703-75FE6D97AFCA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {32635B60-F85F-47AF-B299-2FAED89C7026}
