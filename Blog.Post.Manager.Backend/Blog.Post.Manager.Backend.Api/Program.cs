@@ -69,6 +69,12 @@ public static class Program
         
         var app = builder.Build();
 
+        // Get the port from the environment variable (default to 8080 if not set)
+        var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+
+        // Add the correct URL to listen on
+        app.Urls.Add($"http://*:{port}");
+
         app.UseHttpsRedirection();
         app.MapControllers();
         app.UseCors("AllowAll");
