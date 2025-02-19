@@ -27,7 +27,7 @@ jobs:
         run: dotnet build --configuration Release Blog.Post.Manager.Backend/Blog.Post.Manager.Backend.Api/Blog.Post.Manager.Backend.Api.csproj
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/Blog.Post.Manager.Backend/publish"
+        run: dotnet publish -c Release Blog.Post.Manager.Backend/Blog.Post.Manager.Backend.Api/Blog.Post.Manager.Backend.Api.csproj -o "${{env.DOTNET_ROOT}}/Blog.Post.Manager.Backend/publish"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
