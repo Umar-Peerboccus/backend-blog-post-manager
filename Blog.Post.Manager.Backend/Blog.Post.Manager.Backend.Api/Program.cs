@@ -10,8 +10,8 @@ using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 
 namespace Blog.Post.Manager.Backend.Api;
 
@@ -61,6 +61,16 @@ public static class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
 
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Blog Post Manager API",
+                Version = "v1",
+                Description = "Blog Post Manager Swagger API"
+            });
+        });
+
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowAll",
@@ -68,10 +78,18 @@ public static class Program
         });
         
         var app = builder.Build();
+        app.UseCors("AllowAll");
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog Post Manager API v1");
+            c.RoutePrefix = string.Empty; // Set Swagger UI at root URL
+            c.InjectStylesheet("/swagger-ui/custom.css"); // Helps debug UI loading issues
+        });
 
+        app.UseStaticFiles();
         app.UseHttpsRedirection();
         app.MapControllers();
-        app.UseCors("AllowAll");
 
         await app.RunAsync();
     }
