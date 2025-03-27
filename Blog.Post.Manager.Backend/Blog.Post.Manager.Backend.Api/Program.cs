@@ -1,6 +1,5 @@
 ﻿
 using Blog.Post.Manager.Backend.Commands.Handlers;
-using Blog.Post.Manager.Backend.Cosmos.Model;
 using Blog.Post.Manager.Backend.Mappings;
 using Blog.Post.Manager.Backend.Models.Validators.Requests;
 using Blog.Post.Manager.Backend.Queries.Handlers;
@@ -8,9 +7,7 @@ using Blog.Post.Manager.Backend.Stores.Abstraction;
 using Blog.Post.Manager.Backend.Stores.Cosmos;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace Blog.Post.Manager.Backend.Api;
@@ -28,19 +25,6 @@ public static class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        // Configuration for Cosmos DB NoSql Database
-
-        // Bind settings
-        builder.Services.Configure<CosmosDbSettings>(builder.Configuration.GetSection("CosmosDb"));
-
-        // Register CosmosClient
-        builder.Services.AddSingleton<CosmosClient>(serviceProvider =>
-        {
-            // Get the configuration from appsettings.json
-            var settings = serviceProvider.GetRequiredService<IOptions<CosmosDbSettings>>().Value;
-            return new CosmosClient(settings.AccountEndpoint, settings.Key);
-        });
 
         // Register BlogPostStore
         builder.Services.AddTransient<IBlogPostStore, BlogPostStore>();

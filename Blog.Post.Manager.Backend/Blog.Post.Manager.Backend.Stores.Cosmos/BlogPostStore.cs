@@ -1,9 +1,5 @@
 ﻿using Blog.Post.Manager.Backend.Cosmos.Model;
 using Blog.Post.Manager.Backend.Stores.Abstraction;
-using Microsoft.Azure.Cosmos;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-
 
 namespace Blog.Post.Manager.Backend.Stores.Cosmos;
 
@@ -12,9 +8,6 @@ namespace Blog.Post.Manager.Backend.Stores.Cosmos;
 /// </summary>
 public class BlogPostStore : IBlogPostStore
 {
-    private readonly CosmosClient _cosmosClient;
-    private readonly Container _container;
-    private readonly ILogger<BlogPostStore> _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogPostStore"/> class.
@@ -22,11 +15,8 @@ public class BlogPostStore : IBlogPostStore
     /// <param name="cosmosClient">The cosmos client.</param>
     /// <param name="settings">The database settings.</param>
     /// <param name="logger">The logger.</param>
-    public BlogPostStore(CosmosClient cosmosClient, IOptions<CosmosDbSettings> settings, ILoggerFactory loggerFactory)
+    public BlogPostStore()
     {
-        _cosmosClient = cosmosClient;
-        _container = cosmosClient.GetContainer(settings.Value.DatabaseName, settings.Value.ContainerName);
-        _logger = loggerFactory.CreateLogger<BlogPostStore>() ?? throw new ArgumentNullException(nameof(loggerFactory));
     }
 
     /// <inheritdoc/>
@@ -44,25 +34,6 @@ public class BlogPostStore : IBlogPostStore
             IsDeleted = isDeleted
         };
 
-        try
-        {
-            // Create the blog post in the container.
-            await _container.CreateItemAsync(blogPost);
-        }
-        catch (Exception ex)
-        {
-            if (ex is CosmosException cosmosException)
-            {
-                _logger.LogError($"Received {cosmosException.StatusCode} ({cosmosException.Message}).");
-                throw cosmosException;
-            }
-            else
-            {
-                _logger.LogError($"Exception {ex}.");
-                throw;
-            }
-        }
-
         return blogPost.Id;
     }
 
@@ -70,23 +41,29 @@ public class BlogPostStore : IBlogPostStore
     public async Task<IList<BlogPost>> GetAllBlogPostAsync()
     {
         List<BlogPost> blogPosts = new List<BlogPost>();
-
-        // Query multiple items from container
-        using FeedIterator<BlogPost> feed = _container.GetItemQueryIterator<BlogPost>(
-            queryText: "SELECT * FROM c"
-        );
-
-        // Iterate query result pages
-        while (feed.HasMoreResults)
+        blogPosts.Add(new BlogPost
         {
-            FeedResponse<BlogPost> response = await feed.ReadNextAsync();
+            Id = Guid.NewGuid(),
+            Title = "Title",
+            Content = "Content",
+            Author = "Author",
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            IsPublished = true,
+            IsDeleted = false
+        });
 
-            // Iterate query results
-            foreach (BlogPost item in response)
-            {
-                blogPosts.Add(item);
-            }
-        }
+        blogPosts.Add(new BlogPost
+        {
+            Id = Guid.NewGuid(),
+            Title = "Title_2",
+            Content = "Content_2",
+            Author = "Author_2",
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow,
+            IsPublished = false,
+            IsDeleted = false
+        });
 
         return blogPosts;
     }
@@ -105,45 +82,11 @@ public class BlogPostStore : IBlogPostStore
             IsPublished = isPublished,
             IsDeleted = isDeleted
         };
-
-        try
-        {
-            await _container.ReplaceItemAsync(updatedBlogPost, updatedBlogPost.Id.ToString(), null);
-        }
-        catch (Exception ex)
-        {
-            if (ex is CosmosException cosmosException)
-            {
-                _logger.LogError($"Received {cosmosException.StatusCode} ({cosmosException.Message}).");
-                throw cosmosException;
-            }
-            else
-            {
-                _logger.LogError($"Exception {ex}.");
-                throw;
-            }
-        }
     }
 
     /// <inheritdoc/>
     public async Task DeleteBlogPostAsync(Guid id)
     {
-        try
-        {
-            await _container.DeleteItemAsync<BlogPost>(id.ToString(), new PartitionKey(id.ToString()));
-        }
-        catch (Exception ex)
-        {
-            if (ex is CosmosException cosmosException)
-            {
-                _logger.LogError($"Received {cosmosException.StatusCode} ({cosmosException.Message}).");
-                throw cosmosException;
-            }
-            else
-            {
-                _logger.LogError($"Exception {ex}.");
-                throw;
-            }
-        }
+      
     }
 }
