@@ -3,7 +3,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - backend-blog-post-res
 on:
   push:
     branches:
-      - main
+      - test
   workflow_dispatch:
 
 jobs:
