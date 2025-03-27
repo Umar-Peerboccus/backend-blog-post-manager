@@ -87,7 +87,6 @@ public static class Program
             c.InjectStylesheet("/swagger-ui/custom.css"); // Helps debug UI loading issues
         });
 
-        app.UseStaticFiles();
         app.UseHttpsRedirection();
         app.MapControllers();
 
