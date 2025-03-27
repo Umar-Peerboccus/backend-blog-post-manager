@@ -27,10 +27,5 @@
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Queries\Blog.Post.Manager.Backend.Queries.csproj" />
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Stores.Cosmos\Blog.Post.Manager.Backend.Stores.Cosmos.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 
 </Project>
