@@ -1,4 +1,4 @@
-name: Build and deploy ASP.Net Core app to Azure Web App - backend-blog-post-rest-api
+name: main_backend-blog-post-rest-api
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest  # Change to Ubuntu
     permissions:
       contents: read # Required for actions/checkout
 
@@ -21,13 +21,14 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Restore dependencies
-        run: dotnet restore Blog.Post.Manager.Backend/Blog.Post.Manager.Backend.Api/Blog.Post.Manager.Backend.Api.csproj
+        run: dotnet restore "${{ github.workspace }}/Blog.Post.Manager.Backend/Blog.Post.Manager.Backend.Api/Blog.Post.Manager.Backend.Api.csproj"
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release --no-restore Blog.Post.Manager.Backend/Blog.Post.Manager.Backend.Api/Blog.Post.Manager.Backend.Api.csproj
+        run: dotnet build --configuration Release --no-restore "${{ github.workspace }}/Blog.Post.Manager.Backend/Blog.Post.Manager.Backend.Api/Blog.Post.Manager.Backend.Api.csproj"
 
       - name: Publish the application
-        run: dotnet publish -c Release --no-build -o "${{ github.workspace }}/publish" Blog.Post.Manager.Backend/Blog.Post.Manager.Backend.Api/Blog.Post.Manager.Backend.Api.csproj
+        run: dotnet publish -c Release --no-build -o "${{ github.workspace }}/publish" "${{ github.workspace }}/Blog.Post.Manager.Backend/Blog.Post.Manager.Backend.Api/Blog.Post.Manager.Backend.Api.csproj"
+
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -36,7 +37,7 @@ jobs:
           path: ${{ github.workspace }}/publish
 
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest  # Change to Ubuntu
     needs: build
     environment:
       name: 'Production'
@@ -54,9 +55,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_CBCFC8C6B49F48498ABB8462FE852C14 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_61E9E9A8DDF246C2BA85563F9F013122 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_442C207D27454B839F93414B8123D629 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_BFF5D4A81ADF47379FF6B4DD3A5415EC }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_718ABC3C57AA43BBBAA6BA109D93FC79 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_FA0EA9EB2584411681AF1F528E6D9041 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
