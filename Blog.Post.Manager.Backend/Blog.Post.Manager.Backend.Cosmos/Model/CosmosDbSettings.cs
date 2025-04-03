@@ -11,11 +11,6 @@ public class CosmosDbSettings
     public string AccountEndpoint { get; set; } = default!;
 
     /// <summary>
-    /// The account key.
-    /// </summary>
-    public string Key { get; set; } = default!;
-
-    /// <summary>
     /// The database name.
     /// </summary>
     public string DatabaseName { get; set; } = default!;

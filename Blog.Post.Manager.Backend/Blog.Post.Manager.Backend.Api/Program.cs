@@ -1,9 +1,12 @@
 ﻿
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
 using Blog.Post.Manager.Backend.Commands.Handlers;
 using Blog.Post.Manager.Backend.Cosmos.Model;
 using Blog.Post.Manager.Backend.Mappings;
 using Blog.Post.Manager.Backend.Models.Validators.Requests;
 using Blog.Post.Manager.Backend.Queries.Handlers;
+using Blog.Post.Manager.Backend.Security.Model;
 using Blog.Post.Manager.Backend.Stores.Abstraction;
 using Blog.Post.Manager.Backend.Stores.Cosmos;
 using FluentValidation;
@@ -30,16 +33,22 @@ public static class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Configuration for Cosmos DB NoSql Database
-
-        // Bind settings
+        // Bind cosmosDbSettings
         builder.Services.Configure<CosmosDbSettings>(builder.Configuration.GetSection("CosmosDb"));
+        builder.Services.Configure<KeyVaultSettings>(builder.Configuration.GetSection("KeyVault"));
 
         // Register CosmosClient
         builder.Services.AddSingleton<CosmosClient>(serviceProvider =>
         {
             // Get the configuration from appsettings.json
-            var settings = serviceProvider.GetRequiredService<IOptions<CosmosDbSettings>>().Value;
-            return new CosmosClient(settings.AccountEndpoint, settings.Key);
+            var cosmosDbSettings = serviceProvider.GetRequiredService<IOptions<CosmosDbSettings>>().Value;
+            var keyVaultSettings = serviceProvider.GetRequiredService<IOptions<KeyVaultSettings>>().Value;
+
+            // Get key from key vault
+            var client = new SecretClient(new Uri(keyVaultSettings.KeyVaultUrl), new DefaultAzureCredential());
+            KeyVaultSecret secret = client.GetSecret("sc-nosql-key");
+
+            return new CosmosClient(cosmosDbSettings.AccountEndpoint, secret.Value);
         });
 
         // Register BlogPostStore

@@ -35,9 +35,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.tests", "4.tests", "{0FC2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.dataaccess", "1.dataaccess", "{6A35657E-9E40-434E-9CC6-015E88DD4EDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Stores.Cosmos.UnitTests", "Blog.Post.Manager.Backend.Stores.Cosmos.UnitTests\Blog.Post.Manager.Backend.Stores.Cosmos.UnitTests.csproj", "{BFC8B982-FA67-449D-BC76-848060395C21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Post.Manager.Backend.Stores.Cosmos.UnitTests", "Blog.Post.Manager.Backend.Stores.Cosmos.UnitTests\Blog.Post.Manager.Backend.Stores.Cosmos.UnitTests.csproj", "{BFC8B982-FA67-449D-BC76-848060395C21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Models.Validators", "Blog.Post.Manager.Backend.Models.Validators\Blog.Post.Manager.Backend.Models.Validators.csproj", "{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Post.Manager.Backend.Models.Validators", "Blog.Post.Manager.Backend.Models.Validators\Blog.Post.Manager.Backend.Models.Validators.csproj", "{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Post.Manager.Backend.Security", "Blog.Post.Manager.Backend.Security\Blog.Post.Manager.Backend.Security.csproj", "{D73232A7-EC15-4436-8DC1-12071525ECAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0420C2D3-C88F-4F7D-AB94-A404C0BA22B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73232A7-EC15-4436-8DC1-12071525ECAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73232A7-EC15-4436-8DC1-12071525ECAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73232A7-EC15-4436-8DC1-12071525ECAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73232A7-EC15-4436-8DC1-12071525ECAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="Azure.Identity" Version="1.13.2" />
+    <PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.7.0" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
@@ -26,6 +28,7 @@
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Models.Validators\Blog.Post.Manager.Backend.Models.Validators.csproj" />
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Queries.Handlers\Blog.Post.Manager.Backend.Queries.Handlers.csproj" />
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Queries\Blog.Post.Manager.Backend.Queries.csproj" />
+    <ProjectReference Include="..\Blog.Post.Manager.Backend.Security\Blog.Post.Manager.Backend.Security.csproj" />
     <ProjectReference Include="..\Blog.Post.Manager.Backend.Stores.Cosmos\Blog.Post.Manager.Backend.Stores.Cosmos.csproj" />
   </ItemGroup>
   <ItemGroup>
