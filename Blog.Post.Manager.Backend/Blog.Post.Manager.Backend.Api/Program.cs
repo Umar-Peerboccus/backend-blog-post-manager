@@ -31,6 +31,7 @@ public static class Program
     public static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        Console.WriteLine("Staging Slot");
 
         // Configuration for Cosmos DB NoSql Database
         // Bind cosmosDbSettings
