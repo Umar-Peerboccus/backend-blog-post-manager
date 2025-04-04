@@ -1,4 +1,4 @@
-name: main_backend-blog-post-rest-api
+name: production_main_backend-blog-post-rest-api
 
 on:
   push:
@@ -59,7 +59,7 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FFF0695DDE6B4F77B85C1E8DF572C3AD }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B2AE82E243EB4C7D8FA6900882879452 }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Web App Production
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
